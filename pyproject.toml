@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "little-guys"
+version = "0.1.0"
+description = ""
+authors = ["nworb999 <emma.nworb@gmail.com>"]
+license = "CC BY-SA 4.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+python-osc = "^1.8.3"
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
