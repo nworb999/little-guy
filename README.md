@@ -1,10 +1,9 @@
 # little-guy (name to change)
 
-* run `docker build -t guy . && docker run -p 4000:40 guy`
+* `docker build -t guy . && docker run --network="host" -p 4000:40 guy`
 
 # Emma Next Steps
- * train audio detection model and use on audio
- * train emotion detection model and use on text
+* add emotion flag/parameter
 
 
 
