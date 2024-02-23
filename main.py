@@ -3,6 +3,7 @@ import pathlib
 from pythonosc.udp_client import SimpleUDPClient
 import time
 from audio_processing import transcribe_audio, respond
+from utils import start_tunnel, stop_tunnel
 
 # Configuration for the OSC client
 osc_ip = "192.168.1.98"  # The IP of the OSC server to send messages to
@@ -11,16 +12,28 @@ osc_client = SimpleUDPClient(osc_ip, osc_port)  # Create the OSC client
 
 if __name__ == "__main__":
 
-  audio_path = "garble.mp3"
-  result = transcribe_audio(audio_path)
-  response = respond(result)
+    start_tunnel(
+        remote_server="imagination.mat.ucsb.edu",
+        remote_port=11434,
+        local_port=12345,
+    )
 
-  while True:
-    # Send an OSC message with a string "hello"
-    osc_client.send_message("/greeting", str(response))
-    print("OSC message {} sent to {}:{}".format(str(response), osc_ip, osc_port))
+    try:
+        audio_path = "garble.mp3"
+        result = transcribe_audio(audio_path)
+        response = respond(result)
 
-    # Wait for 10 seconds before sending the next message
-    time.sleep(10)
+        while True:
+            osc_client.send_message("/greeting", str(response))
+            print(f"Call :: {result}")
+            print()
+            print(f"Response :: {response}")
+            print()
+            # print(
+            #     "OSC message {} sent to {}:{}".format(str(response), osc_ip, osc_port)
+            # )
 
+            time.sleep(10)
 
+    finally:
+        stop_tunnel()

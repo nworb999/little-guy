@@ -2,7 +2,7 @@ import requests
 import json
 
 
-def get_response(prompt, history=[]):
+def get_ollama_response(prompt, history=[]):
     url = "http://localhost:12345/api/chat"
     if history is not None:
         history.append({"role": "user", "content": prompt})

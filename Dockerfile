@@ -5,7 +5,7 @@ RUN apt-get update && \
 
 WORKDIR /usr/src/app
 
-RUN pip3 install --no-cache-dir python-osc pandas openai-whisper
+RUN pip3 install --no-cache-dir python-osc pandas openai-whisper requests sshtunnel
 
 COPY . .
 
